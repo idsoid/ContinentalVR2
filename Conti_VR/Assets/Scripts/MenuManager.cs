@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
         }
         else if (logoTimer <= 0)
         {
-            SceneManager.LoadScene("TesterScene");
+            SceneManager.LoadScene("CarScene");
         }
     }
 
