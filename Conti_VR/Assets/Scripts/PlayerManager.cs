@@ -20,27 +20,29 @@ public class PlayerManager : MonoBehaviour
     {
         if (vrCam.transform.localPosition != Vector3.zero && !heightSet)
         {
-            float heightDiff = (1 - vrCam.transform.localPosition.y);
+            float heightDiff = 1.1f - vrCam.transform.localPosition.y;
             transform.position = new Vector3(0, transform.position.y + heightDiff, 0);
             heightSet = true;
         }
+
+        UpdateHeight();
     }
 
-    //private void UpdateHeight()
-    //{
-    //    if (gameManager.GetHeight().magnitude < 0.1f)
-    //    {
-    //        return;
-    //    }
+    private void UpdateHeight()
+    {
+        if (gameManager.GetHeight().magnitude < 0.1f)
+        {
+            return;
+        }
 
-    //    Vector3 translateVector = 0.5f * Time.deltaTime * new Vector3(0, 1, 0);
-    //    if (gameManager.GetHeight().y > 0.2f)
-    //    {
-    //        transform.position += translateVector;
-    //    }
-    //    else if (gameManager.GetHeight().y < -0.2f)
-    //    {
-    //        transform.position -= translateVector;
-    //    }
-    //}
+        Vector3 translateVector = 0.5f * Time.deltaTime * new Vector3(0, 1, 0);
+        if (gameManager.GetHeight().y > 0.2f)
+        {
+            transform.position += translateVector;
+        }
+        else if (gameManager.GetHeight().y < -0.2f)
+        {
+            transform.position -= translateVector;
+        }
+    }
 }
