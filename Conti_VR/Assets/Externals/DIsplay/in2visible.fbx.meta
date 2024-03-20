@@ -3,7 +3,12 @@ guid: d001d5f5bc9853c4b8447c6bf4716626
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: movsteer_1.0.008
+    second: {fileID: 2100000, guid: b8a43b03e7310ed43a66c50a450a157a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
