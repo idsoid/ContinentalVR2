@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 0b9eb90aaa3e43c43b6643ffd07dad94
+guid: d001d5f5bc9853c4b8447c6bf4716626
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: movsteer_1.0.008
-    second: {fileID: 2100000, guid: 6c75ad3adcaa50b4ab571dc7cb6a828e, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

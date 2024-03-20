@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         
-        Vector3 translateVector = 0.5f * Time.deltaTime * new Vector3(0, 1, 0);
+        Vector3 translateVector = 0.25f * Time.deltaTime * new Vector3(0, 1, 0);
         if (gameManager.GetHeight().y > 0.2f)
         {
             transform.position += translateVector;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CIDOption : MonoBehaviour
+public class ClusterOption : MonoBehaviour
 {
     //Hand variables
     private bool handReady = true;
@@ -13,15 +13,17 @@ public class CIDOption : MonoBehaviour
 
     //Object variables
     [SerializeField]
-    private List<GameObject> cidOptions = new();
+    private List<GameObject> clusterOptions = new();
     private int listIndicator = 0;
 
     [SerializeField]
-    private Transform circleCanvas; 
+    private Transform circleCanvas;
     [SerializeField]
     private Image circleFill;
     [SerializeField]
     private List<GameObject> popupOptions = new();
+    [SerializeField]
+    private GameObject defaultStand;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -64,16 +66,19 @@ public class CIDOption : MonoBehaviour
         circleCanvas.gameObject.SetActive(false);
         circleFill.fillAmount = 0;
         handInTimer = 1.25f;
-        switch (PlayerPrefsManager.Load("CID"))
+        switch (PlayerPrefsManager.Load("Cluster"))
         {
             case "Option 1":
-                cidOptions[0].SetActive(true);
+                clusterOptions[0].SetActive(true);
+                listIndicator = 0;
                 break;
             case "Option 2":
-                cidOptions[1].SetActive(true);
+                clusterOptions[1].SetActive(true);
+                listIndicator = 1;
                 break;
             case "Option 3":
-                cidOptions[2].SetActive(true);
+                clusterOptions[2].SetActive(true);
+                listIndicator = 2;
                 break;
             default:
                 break;
@@ -100,6 +105,14 @@ public class CIDOption : MonoBehaviour
                 popupOptions[i].SetActive(true);
             }
         }
+
+        for (int i = 0; i < clusterOptions.Count; i++)
+        {
+            if (clusterOptions[i].activeSelf)
+            {
+                listIndicator = i;
+            }
+        }
     }
 
     //Swipe functions
@@ -113,24 +126,24 @@ public class CIDOption : MonoBehaviour
         if (swipeDir > 0.08f)
         {
             Debug.Log("Swiped down");
-            cidOptions[listIndicator].SetActive(false);
+            clusterOptions[listIndicator].SetActive(false);
             listIndicator++;
-            if (listIndicator >= cidOptions.Count)
+            if (listIndicator >= clusterOptions.Count)
             {
                 listIndicator = 0;
             }
-            cidOptions[listIndicator].SetActive(true);
+            clusterOptions[listIndicator].SetActive(true);
         }
         else if (swipeDir < -0.08f)
         {
             Debug.Log("Swiped up");
-            cidOptions[listIndicator].SetActive(false);
+            clusterOptions[listIndicator].SetActive(false);
             listIndicator--;
             if (listIndicator < 0)
             {
-                listIndicator = cidOptions.Count - 1;
+                listIndicator = clusterOptions.Count - 1;
             }
-            cidOptions[listIndicator].SetActive(true);
+            clusterOptions[listIndicator].SetActive(true);
         }
     }
     IEnumerator HandReady()

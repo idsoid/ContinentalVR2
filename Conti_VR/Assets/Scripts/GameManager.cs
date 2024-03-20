@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
     
-    public Transform desiredHeadPosition;
     public Transform steamCamera;
     public Transform cameraRig;
 
@@ -99,7 +98,7 @@ public class GameManager : MonoBehaviour
             // Calculate postional offset between CameraRig and Camera
             Vector3 offsetPos = steamCamera.position - cameraRig.position;
             // Reposition CameraRig to desired position minus offset
-            cameraRig.position = (desiredHeadPosition.position - offsetPos);
+            cameraRig.position = (new Vector3(0, 1.1f, 0.125f) - offsetPos);
 
             Debug.Log("Seat recentered!");
         }

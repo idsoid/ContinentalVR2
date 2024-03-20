@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class PopupOption : MonoBehaviour
 {
     [SerializeField]
-    private Transform circleCanvas, mainBox;
+    private Transform circleCanvas;
     [SerializeField]
     private Image circleFill;
     [SerializeField]
     private List<GameObject> otherOptions = new();
+    public GameObject mainBox;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -41,10 +42,11 @@ public class PopupOption : MonoBehaviour
         }
         if (circleFill.fillAmount >= 1)
         {
-            mainBox.GetComponent<MeshRenderer>().material.color = GetComponent<MeshRenderer>().material.color;
+            mainBox.SetActive(true);
             circleFill.fillAmount = 0;
             foreach (var option in otherOptions)
             {
+                option.GetComponent<PopupOption>().mainBox.SetActive(false);
                 option.SetActive(false);
             }
             gameObject.SetActive(false);
