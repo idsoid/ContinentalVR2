@@ -110,7 +110,7 @@ public class CIDOption : MonoBehaviour
     private void CheckSwipe(Collider hand)
     {
         float swipeDir = handPosY - hand.transform.position.y;
-        if (swipeDir > 0.06f)
+        if (swipeDir > 0.08f)
         {
             Debug.Log("Swiped down");
             cidOptions[listIndicator].SetActive(false);
@@ -121,7 +121,7 @@ public class CIDOption : MonoBehaviour
             }
             cidOptions[listIndicator].SetActive(true);
         }
-        else if (swipeDir < -0.06f)
+        else if (swipeDir < -0.08f)
         {
             Debug.Log("Swiped up");
             cidOptions[listIndicator].SetActive(false);
