@@ -35,12 +35,12 @@ public class PlayerManager : MonoBehaviour
             return;
         }
 
-        Vector3 translateVector = 0.5f * Time.deltaTime * new Vector3(0, 1, 0);
-        if (gameManager.GetHeight().y > 0.2f)
+        Vector3 translateVector = 0.2f * Time.deltaTime * new Vector3(0, 1, 0);
+        if (gameManager.GetHeight().y > 0.5f)
         {
             transform.position += translateVector;
         }
-        else if (gameManager.GetHeight().y < -0.2f)
+        else if (gameManager.GetHeight().y < -0.5f)
         {
             transform.position -= translateVector;
         }
