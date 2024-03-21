@@ -36,7 +36,7 @@ public class MenuManager : MonoBehaviour
         {
             if (toggle.isOn)
             {
-                PlayerPrefsManager.Save("Language", toggle.GetComponentInChildren<Text>().text);
+                PlayerPrefsManager.Save("Language", toggle.name);
                 break;
             }
         }
@@ -45,7 +45,7 @@ public class MenuManager : MonoBehaviour
         {
             if (toggle.isOn)
             {
-                PlayerPrefsManager.Save("Cluster", toggle.GetComponentInChildren<Text>().text);
+                PlayerPrefsManager.Save("Cluster", toggle.name);
                 break;
             }
         }
@@ -54,7 +54,7 @@ public class MenuManager : MonoBehaviour
         {
             if (toggle.isOn)
             {
-                PlayerPrefsManager.Save("CID", toggle.GetComponentInChildren<Text>().text);
+                PlayerPrefsManager.Save("CID", toggle.name);
                 break;
             }
         }

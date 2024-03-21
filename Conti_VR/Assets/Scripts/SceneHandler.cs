@@ -39,6 +39,9 @@ public class SceneHandler : MonoBehaviour
             case "Toggle":
                 target.GetComponent<Toggle>().isOn = true;
                 break;
+            case "Option":
+                target.GetComponent<ILaserOption>().LaserClick();
+                break;
             default:
                 break;
         }
@@ -57,6 +60,9 @@ public class SceneHandler : MonoBehaviour
                 toggleColorBlock.normalColor = Color.grey;
                 target.GetComponent<Toggle>().colors = toggleColorBlock;
                 break;
+            case "Option":
+                target.GetComponent<ILaserOption>().LaserEnter();
+                break;
             default:
                 break;
         }
@@ -74,6 +80,9 @@ public class SceneHandler : MonoBehaviour
                 ColorBlock toggleColorBlock = target.GetComponent<Toggle>().colors;
                 toggleColorBlock.normalColor = Color.white;
                 target.GetComponent<Toggle>().colors = toggleColorBlock;
+                break;
+            case "Option":
+                target.GetComponent<ILaserOption>().LaserExit();
                 break;
             default:
                 break;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ClusterOption : MonoBehaviour
+public class ClusterOption : MonoBehaviour, ILaserOption
 {
     //Hand variables
     private bool handReady = true;
@@ -16,6 +16,8 @@ public class ClusterOption : MonoBehaviour
     private List<GameObject> clusterOptions = new();
     private int listIndicator = 0;
 
+    [SerializeField]
+    private ParticleSystem laserParticle;
     [SerializeField]
     private Transform circleCanvas;
     [SerializeField]
@@ -68,15 +70,15 @@ public class ClusterOption : MonoBehaviour
         handInTimer = 1.25f;
         switch (PlayerPrefsManager.Load("Cluster"))
         {
-            case "Option 1":
+            case "Affordable":
                 clusterOptions[0].SetActive(true);
                 listIndicator = 0;
                 break;
-            case "Option 2":
+            case "Advanced":
                 clusterOptions[1].SetActive(true);
                 listIndicator = 1;
                 break;
-            case "Option 3":
+            case "Premium":
                 clusterOptions[2].SetActive(true);
                 listIndicator = 2;
                 break;
@@ -151,5 +153,25 @@ public class ClusterOption : MonoBehaviour
         yield return new WaitForSeconds(1.1f);
         handReady = true;
         handLeft = false;
+    }
+
+    //Laser functions
+    public void LaserClick()
+    {
+        for (int i = 0; i < popupOptions.Count; i++)
+        {
+            popupOptions[i].SetActive(true);
+        }
+    }
+    public void LaserEnter()
+    {
+        if (!popupOptions[0].activeSelf)
+        {
+            laserParticle.Play();
+        }
+    }
+    public void LaserExit()
+    {
+        laserParticle.Stop();
     }
 }

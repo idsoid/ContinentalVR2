@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PopupOption : MonoBehaviour
+public class PopupOption : MonoBehaviour, ILaserOption
 {
+    [SerializeField]
+    private ParticleSystem laserParticle;
     [SerializeField]
     private Transform circleCanvas;
     [SerializeField]
@@ -51,5 +53,27 @@ public class PopupOption : MonoBehaviour
             }
             gameObject.SetActive(false);
         }
+    }
+
+    //Laser Functions
+    public void LaserClick()
+    {
+        mainBox.SetActive(true);
+        circleFill.fillAmount = 0;
+        foreach (var option in otherOptions)
+        {
+            option.GetComponent<PopupOption>().mainBox.SetActive(false);
+            option.SetActive(false);
+        }
+        gameObject.SetActive(false);
+    }
+
+    public void LaserEnter()
+    {
+        laserParticle.Play();
+    }
+    public void LaserExit()
+    {
+        laserParticle.Stop();
     }
 }

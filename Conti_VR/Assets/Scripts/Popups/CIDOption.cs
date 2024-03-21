@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CIDOption : MonoBehaviour
+public class CIDOption : MonoBehaviour, ILaserOption
 {
     //Hand variables
     private bool handReady = true;
@@ -17,7 +17,9 @@ public class CIDOption : MonoBehaviour
     private int listIndicator = 0;
 
     [SerializeField]
-    private Transform circleCanvas; 
+    private ParticleSystem laserParticle;
+    [SerializeField]
+    private Transform circleCanvas;
     [SerializeField]
     private Image circleFill;
     [SerializeField]
@@ -66,15 +68,19 @@ public class CIDOption : MonoBehaviour
         handInTimer = 1.25f;
         switch (PlayerPrefsManager.Load("CID"))
         {
-            case "Option 1":
+            case "Affordable":
                 cidOptions[0].SetActive(true);
                 listIndicator = 0;
                 break;
-            case "Option 2":
+            case "Advance 1":
                 cidOptions[1].SetActive(true);
                 listIndicator = 1;
                 break;
-            case "Option 3":
+            case "Advance 2":
+                cidOptions[2].SetActive(true);
+                listIndicator = 2;
+                break;
+            case "Premium":
                 cidOptions[2].SetActive(true);
                 listIndicator = 2;
                 break;
@@ -149,5 +155,25 @@ public class CIDOption : MonoBehaviour
         yield return new WaitForSeconds(1.1f);
         handReady = true;
         handLeft = false;
+    }
+
+    //Laser functions
+    public void LaserClick()
+    {
+        for (int i = 0; i < popupOptions.Count; i++)
+        {
+            popupOptions[i].SetActive(true);
+        }
+    }
+    public void LaserEnter()
+    {
+        if (!popupOptions[0].activeSelf)
+        {
+            laserParticle.Play();
+        }
+    }
+    public void LaserExit()
+    {
+        laserParticle.Stop();
     }
 }
