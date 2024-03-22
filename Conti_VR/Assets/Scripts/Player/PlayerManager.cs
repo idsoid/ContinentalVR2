@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.Extras;
 
 public class PlayerManager : MonoBehaviour
 {
     private GameManager gameManager;
     [SerializeField]
     private Transform vrCam;
+    [SerializeField]
+    private SteamVR_LaserPointer laserPointer;
     private bool heightSet = false;
 
     // Start is called before the first frame update
@@ -25,6 +28,7 @@ public class PlayerManager : MonoBehaviour
             heightSet = true;
         }
 
+        laserPointer.active = gameManager.GetLaser();
         UpdateHeight();
     }
 

@@ -7,17 +7,6 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
-    
-    public Transform steamCamera;
-    public Transform cameraRig;
-
-    public SteamVR_Action_Boolean swipeEnabled;
-    public SteamVR_Action_Vector2 movementInput;
-    public SteamVR_Action_Vector2 heightInput;
-    public SteamVR_Action_Boolean toggleLaser; 
-
-    private int languageOption, clusterOption, cidOption;
-
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -29,6 +18,16 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
     }
+
+    public Transform steamCamera;
+    public Transform cameraRig;
+
+    public SteamVR_Action_Boolean swipeEnabled;
+    public SteamVR_Action_Vector2 movementInput;
+    public SteamVR_Action_Vector2 heightInput;
+    public SteamVR_Action_Boolean toggleLaser;
+
+    private int languageOption, clusterOption, cidOption;
 
     //SteamVR Inputs
     #region
@@ -84,6 +83,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    //Reset Player
     public void ResetOrientation()
     {
         if ((steamCamera != null) && (cameraRig != null))

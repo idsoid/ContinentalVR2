@@ -4,73 +4,107 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    #region Singleton code
-    private static AudioManager _instance;
-
-    public static AudioManager Instance { get { return _instance; } }
-
+    private static AudioManager instance;
+    public static AudioManager Instance { get { return instance; } }
     private void Awake()
     {
-        if (_instance != null && _instance != this)
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
         }
         else
         {
-            _instance = this;
+            instance = this;
         }
 
     }
-    #endregion
-    struct AudioParams
-    {
-        //you can write the name of the audio you are refering to
-        public string audioName;
-        public AudioClass m_AudioClass;
-        //constructor
-        public AudioParams(string _name, AudioClass _audioClass)
-        {
-            audioName = _name;
-            m_AudioClass = _audioClass;
-        }
-    }
-    List<AudioParams> audioList = new List<AudioParams>();
-    // Start is called before the first frame update
+
+    [SerializeField]
+    private List<AudioSource> audioSources = new();
+
     void Start()
     {
-        //on game start get all child audioClasses
-        for (int i = 0; i < transform.childCount; ++i)
+        if (PlayerPrefsManager.Load("Cluster") == "Affordable")
         {
-            AudioClass childAC = transform.GetChild(i).GetComponent<AudioClass>();
-            audioList.Add(new AudioParams(childAC.audioName, childAC));
+            switch (PlayerPrefsManager.Load("CID"))
+            {
+                case "Affordable":
+                    PlayAudio("BasicBasic");
+                    break;
+                case "Advance 1":
+                    PlayAudio("BasicAdvance1");
+                    break;
+                case "Advance 2":
+                    PlayAudio("BasicAdvance2");
+                    break;
+                case "Premium":
+                    PlayAudio("BasicPremium");
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if (PlayerPrefsManager.Load("Cluster") == "Advance")
+        {
+            switch (PlayerPrefsManager.Load("CID"))
+            {
+                case "Affordable":
+                    PlayAudio("AdvanceBasic");
+                    break;
+                case "Advance 1":
+                    PlayAudio("AdvanceAdvance1");
+                    break;
+                case "Advance 2":
+                    PlayAudio("AdvanceAdvance2");
+                    break;
+                case "Premium":
+                    PlayAudio("AdvancePremium");
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if (PlayerPrefsManager.Load("Cluster") == "Premium")
+        {
+            switch (PlayerPrefsManager.Load("CID"))
+            {
+                case "Affordable":
+                    PlayAudio("PremiumBasic");
+                    break;
+                case "Advance 1":
+                    PlayAudio("PremiumActive1");
+                    break;
+                case "Advance 2":
+                    PlayAudio("PremiumActive2");
+                    break;
+                case "Premium":
+                    PlayAudio("PremiumPremium");
+                    break;
+                default:
+                    break;
+            }
         }
     }
-    //play a specific audio by name
-    public void PlayAudio(string _audioName)
+
+    public void PlayAudio(string audioName)
     {
-        for (int i = 0; i < transform.childCount; ++i)
+        //Check if an audio is playing
+        foreach (var audio in audioSources)
         {
-            if (audioList[i].audioName != _audioName)
-                continue;
-            audioList[i].m_AudioClass.PlayAudio();
+            if (audio.isPlaying)
+            {
+                audio.Stop();
+            }
         }
-    }
-    //stop a specifc audio by name
-    public void StopAudio(string _audioName)
-    {
-        for (int i = 0; i < transform.childCount; ++i)
+
+        //Play audio by name
+        foreach (var audio in audioSources)
         {
-            if (audioList[i].audioName != _audioName)
-                continue;
-            audioList[i].m_AudioClass.StopAudio();
-        }
-    }
-    //stop all active audios
-    public void StopAllAudio()
-    {
-        for (int i = 0; i < transform.childCount; ++i)
-        {
-            audioList[i].m_AudioClass.StopAudio();
+            if (audio.gameObject.name == audioName)
+            {
+                audio.PlayDelayed(1.0f);
+                break;
+            }
         }
     }
 }

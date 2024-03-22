@@ -69,24 +69,21 @@ public class CIDOption : MonoBehaviour, ILaserOption
         switch (PlayerPrefsManager.Load("CID"))
         {
             case "Affordable":
-                cidOptions[0].SetActive(true);
                 listIndicator = 0;
                 break;
             case "Advance 1":
-                cidOptions[1].SetActive(true);
                 listIndicator = 1;
                 break;
             case "Advance 2":
-                cidOptions[2].SetActive(true);
                 listIndicator = 2;
                 break;
             case "Premium":
-                cidOptions[3].SetActive(true);
                 listIndicator = 3;
                 break;
             default:
                 break;
         }
+        cidOptions[listIndicator].SetActive(true);
         foreach (var popup in popupOptions)
         {
             popup.SetActive(false);

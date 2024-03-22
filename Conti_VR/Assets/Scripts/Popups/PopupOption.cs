@@ -71,7 +71,14 @@ public class PopupOption : MonoBehaviour, ILaserOption
     public void LaserEnter()
     {
         meshRenderer.material.EnableKeyword("_EMISSION");
-        meshRenderer.material.SetColor("_EmissionColor", new Color(1, 0.8f, 0, 0.25f));
+        if (mainBox.name == "in2visible")
+        {
+            meshRenderer.material.SetColor("_EmissionColor", new Color(1, 0.8f, 0, 0.1f));
+        }
+        else
+        {
+            meshRenderer.material.SetColor("_EmissionColor", new Color(1, 0.8f, 0, 0.25f));
+        }
     }
     public void LaserExit()
     {

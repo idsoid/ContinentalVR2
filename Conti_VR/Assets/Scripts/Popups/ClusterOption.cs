@@ -71,21 +71,19 @@ public class ClusterOption : MonoBehaviour, ILaserOption
         switch (PlayerPrefsManager.Load("Cluster"))
         {
             case "Affordable":
-                clusterOptions[0].SetActive(true);
                 listIndicator = 0;
                 break;
-            case "Advanced":
-                clusterOptions[1].SetActive(true);
+            case "Advance":
                 listIndicator = 1;
                 break;
             case "Premium":
-                clusterOptions[2].SetActive(true);
                 listIndicator = 2;
                 defaultStand.SetActive(false);
                 break;
             default:
                 break;
         }
+        clusterOptions[listIndicator].SetActive(true);
         foreach (var popup in popupOptions)
         {
             popup.SetActive(false);
@@ -179,7 +177,14 @@ public class ClusterOption : MonoBehaviour, ILaserOption
         {
             var mat = clusterMesh[listIndicator].material;
             mat.EnableKeyword("_EMISSION");
-            mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0, 0.25f));
+            if (listIndicator == 2)
+            {
+                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0, 0.1f));
+            }
+            else
+            {
+                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0, 0.25f));
+            }
         }
     }
     public void LaserExit()
