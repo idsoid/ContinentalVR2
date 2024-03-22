@@ -14,10 +14,10 @@ public class ClusterOption : MonoBehaviour, ILaserOption
     //Object variables
     [SerializeField]
     private List<GameObject> clusterOptions = new();
-    private int listIndicator = 0;
-
     [SerializeField]
-    private ParticleSystem laserParticle;
+    private List<MeshRenderer> clusterMesh = new();
+    private int listIndicator = 0;
+    
     [SerializeField]
     private Transform circleCanvas;
     [SerializeField]
@@ -81,6 +81,7 @@ public class ClusterOption : MonoBehaviour, ILaserOption
             case "Premium":
                 clusterOptions[2].SetActive(true);
                 listIndicator = 2;
+                defaultStand.SetActive(false);
                 break;
             default:
                 break;
@@ -113,6 +114,15 @@ public class ClusterOption : MonoBehaviour, ILaserOption
             if (clusterOptions[i].activeSelf)
             {
                 listIndicator = i;
+            }
+
+            if (listIndicator == 2)
+            {
+                defaultStand.SetActive(false);
+            }
+            else
+            {
+                defaultStand.SetActive(true);
             }
         }
     }
@@ -167,11 +177,14 @@ public class ClusterOption : MonoBehaviour, ILaserOption
     {
         if (!popupOptions[0].activeSelf)
         {
-            laserParticle.Play();
+            var mat = clusterMesh[listIndicator].material;
+            mat.EnableKeyword("_EMISSION");
+            mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0, 0.25f));
         }
     }
     public void LaserExit()
     {
-        laserParticle.Stop();
+        var mat = clusterMesh[listIndicator].material;
+        mat.DisableKeyword("_EMISSION");
     }
 }

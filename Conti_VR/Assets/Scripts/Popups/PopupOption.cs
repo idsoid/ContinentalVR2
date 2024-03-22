@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PopupOption : MonoBehaviour, ILaserOption
 {
     [SerializeField]
-    private ParticleSystem laserParticle;
+    private MeshRenderer meshRenderer;
     [SerializeField]
     private Transform circleCanvas;
     [SerializeField]
@@ -70,10 +70,11 @@ public class PopupOption : MonoBehaviour, ILaserOption
 
     public void LaserEnter()
     {
-        laserParticle.Play();
+        meshRenderer.material.EnableKeyword("_EMISSION");
+        meshRenderer.material.SetColor("_EmissionColor", new Color(1, 0.8f, 0, 0.25f));
     }
     public void LaserExit()
     {
-        laserParticle.Stop();
+        meshRenderer.material.DisableKeyword("_EMISSION");
     }
 }

@@ -14,10 +14,10 @@ public class CIDOption : MonoBehaviour, ILaserOption
     //Object variables
     [SerializeField]
     private List<GameObject> cidOptions = new();
-    private int listIndicator = 0;
-
     [SerializeField]
-    private ParticleSystem laserParticle;
+    private List<MeshRenderer> cidMesh = new();
+    private int listIndicator = 0;
+    
     [SerializeField]
     private Transform circleCanvas;
     [SerializeField]
@@ -81,8 +81,8 @@ public class CIDOption : MonoBehaviour, ILaserOption
                 listIndicator = 2;
                 break;
             case "Premium":
-                cidOptions[2].SetActive(true);
-                listIndicator = 2;
+                cidOptions[3].SetActive(true);
+                listIndicator = 3;
                 break;
             default:
                 break;
@@ -169,11 +169,14 @@ public class CIDOption : MonoBehaviour, ILaserOption
     {
         if (!popupOptions[0].activeSelf)
         {
-            laserParticle.Play();
+            var mat = cidMesh[listIndicator].material;
+            mat.EnableKeyword("_EMISSION");
+            mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0, 0.25f));
         }
     }
     public void LaserExit()
     {
-        laserParticle.Stop();
+        var mat = cidMesh[listIndicator].material;
+        mat.DisableKeyword("_EMISSION");
     }
 }
