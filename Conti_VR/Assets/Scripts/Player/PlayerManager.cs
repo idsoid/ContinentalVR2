@@ -26,6 +26,7 @@ public class PlayerManager : MonoBehaviour
             float heightDiff = 1.1f - vrCam.transform.localPosition.y;
             transform.position = new Vector3(0, transform.position.y + heightDiff, 0);
             heightSet = true;
+            gameManager.ResetOrientation();
         }
 
         laserPointer.active = gameManager.GetLaser();

@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 447954}
   - component: {fileID: 11465950}
   - component: {fileID: 823232705}
+  - component: {fileID: 5388320443718590654}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -310,6 +311,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!114 &5388320443718590654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef90fee969531e4f855c73b8a515690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vrCam: {fileID: 429506}
+  laserPointer: {fileID: 1765462486338997327}
 --- !u!1 &109154
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +698,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4160749567
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1095,7 +1110,7 @@ MonoBehaviour:
   handCollider: {fileID: 0}
   clearanceCheckMask:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 4294967295
   hand: {fileID: 0}
 --- !u!1 &160596
 GameObject:
@@ -1109,6 +1124,7 @@ GameObject:
   - component: {fileID: 11401046}
   - component: {fileID: 114000011957598740}
   - component: {fileID: 114000010591715100}
+  - component: {fileID: 1765462486338997327}
   m_Layer: 6
   m_Name: RightHand
   m_TagString: Untagged
@@ -1239,6 +1255,30 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   hand: {fileID: 0}
+--- !u!114 &1765462486338997327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f511c1adaa1e94ebe7ca97bbcabd17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pose: {fileID: 114000011957598740}
+  interactWithUI:
+    actionPath: /actions/default/in/InteractUI
+    needsReinit: 0
+  active: 0
+  color: {r: 1, g: 0.80166054, b: 0, a: 0}
+  thickness: 0.001
+  clickColor: {r: 1, g: 0.6736357, b: 0, a: 1}
+  holder: {fileID: 0}
+  pointer: {fileID: 0}
+  addRigidBody: 0
+  reference: {fileID: 0}
 --- !u!1 &165334
 GameObject:
   m_ObjectHideFlags: 0

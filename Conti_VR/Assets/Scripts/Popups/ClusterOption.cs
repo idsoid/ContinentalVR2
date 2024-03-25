@@ -70,7 +70,7 @@ public class ClusterOption : MonoBehaviour, ILaserOption
         handInTimer = 1.25f;
         switch (PlayerPrefsManager.Load("Cluster"))
         {
-            case "Affordable":
+            case "Basic":
                 listIndicator = 0;
                 break;
             case "Advance":
@@ -133,7 +133,7 @@ public class ClusterOption : MonoBehaviour, ILaserOption
     private void CheckSwipe(Collider hand)
     {
         float swipeDir = handPosY - hand.transform.position.y;
-        if (swipeDir > 0.08f)
+        if (swipeDir > 0.06f)
         {
             Debug.Log("Swiped down");
             clusterOptions[listIndicator].SetActive(false);
@@ -144,7 +144,7 @@ public class ClusterOption : MonoBehaviour, ILaserOption
             }
             clusterOptions[listIndicator].SetActive(true);
         }
-        else if (swipeDir < -0.08f)
+        else if (swipeDir < -0.06f)
         {
             Debug.Log("Swiped up");
             clusterOptions[listIndicator].SetActive(false);
@@ -154,6 +154,41 @@ public class ClusterOption : MonoBehaviour, ILaserOption
                 listIndicator = clusterOptions.Count - 1;
             }
             clusterOptions[listIndicator].SetActive(true);
+        }
+
+        if (PlayerPrefsManager.Load("Language") == "English")
+        {
+            switch (listIndicator)
+            {
+                case 1:
+                    AudioManager.Instance.PlayAudio("EMeterBasic");
+                    break;
+                case 2:
+                    AudioManager.Instance.PlayAudio("EMeterAdvance");
+                    break;
+                case 3:
+                    AudioManager.Instance.PlayAudio("EMeterPremium");
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if (PlayerPrefsManager.Load("Language") == "Japanese")
+        {
+            switch (listIndicator)
+            {
+                case 1:
+                    AudioManager.Instance.PlayAudio("JMeterBasic");
+                    break;
+                case 2:
+                    AudioManager.Instance.PlayAudio("JMeterAdvance");
+                    break;
+                case 3:
+                    AudioManager.Instance.PlayAudio("JMeterPremium");
+                    break;
+                default:
+                    break;
+            }
         }
     }
     IEnumerator HandReady()
@@ -176,15 +211,15 @@ public class ClusterOption : MonoBehaviour, ILaserOption
         if (!popupOptions[0].activeSelf)
         {
             var mat = clusterMesh[listIndicator].material;
-            mat.EnableKeyword("_EMISSION");
             if (listIndicator == 2)
             {
-                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0, 0.1f));
+                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 0.25f);
             }
             else
             {
-                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0, 0.25f));
+                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 1.5f);
             }
+            mat.EnableKeyword("_EMISSION");
         }
     }
     public void LaserExit()

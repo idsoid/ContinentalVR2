@@ -68,7 +68,7 @@ public class CIDOption : MonoBehaviour, ILaserOption
         handInTimer = 1.25f;
         switch (PlayerPrefsManager.Load("CID"))
         {
-            case "Affordable":
+            case "Basic":
                 listIndicator = 0;
                 break;
             case "Advance 1":
@@ -124,7 +124,7 @@ public class CIDOption : MonoBehaviour, ILaserOption
     private void CheckSwipe(Collider hand)
     {
         float swipeDir = handPosY - hand.transform.position.y;
-        if (swipeDir > 0.08f)
+        if (swipeDir > 0.06f)
         {
             Debug.Log("Swiped down");
             cidOptions[listIndicator].SetActive(false);
@@ -135,7 +135,7 @@ public class CIDOption : MonoBehaviour, ILaserOption
             }
             cidOptions[listIndicator].SetActive(true);
         }
-        else if (swipeDir < -0.08f)
+        else if (swipeDir < -0.06f)
         {
             Debug.Log("Swiped up");
             cidOptions[listIndicator].SetActive(false);
@@ -145,6 +145,47 @@ public class CIDOption : MonoBehaviour, ILaserOption
                 listIndicator = cidOptions.Count - 1;
             }
             cidOptions[listIndicator].SetActive(true);
+        }
+
+        if (PlayerPrefsManager.Load("Language") == "English")
+        {
+            switch (listIndicator)
+            {
+                case 1:
+                    AudioManager.Instance.PlayAudio("ECIDBasic");
+                    break;
+                case 2:
+                    AudioManager.Instance.PlayAudio("ECIDAdvance1");
+                    break;
+                case 3:
+                    AudioManager.Instance.PlayAudio("ECIDAdvance2");
+                    break;
+                case 4:
+                    AudioManager.Instance.PlayAudio("ECIDPremium");
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if (PlayerPrefsManager.Load("Language") == "Japanese")
+        {
+            switch (listIndicator)
+            {
+                case 1:
+                    AudioManager.Instance.PlayAudio("JCIDBasic");
+                    break;
+                case 2:
+                    AudioManager.Instance.PlayAudio("JCIDAdvance1");
+                    break;
+                case 3:
+                    AudioManager.Instance.PlayAudio("JCIDAdvance2");
+                    break;
+                case 4:
+                    AudioManager.Instance.PlayAudio("JCIDPremium");
+                    break;
+                default:
+                    break;
+            }
         }
     }
     IEnumerator HandReady()
@@ -167,8 +208,15 @@ public class CIDOption : MonoBehaviour, ILaserOption
         if (!popupOptions[0].activeSelf)
         {
             var mat = cidMesh[listIndicator].material;
+            if (listIndicator == 0)
+            {
+                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 0.25f);
+            }
+            else
+            {
+                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 1.5f);
+            }
             mat.EnableKeyword("_EMISSION");
-            mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0, 0.25f));
         }
     }
     public void LaserExit()

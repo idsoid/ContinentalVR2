@@ -58,6 +58,65 @@ public class PopupOption : MonoBehaviour, ILaserOption
     //Laser Functions
     public void LaserClick()
     {
+        if (PlayerPrefsManager.Load("Language") == "English")
+        {
+            switch (mainBox.name)
+            {
+                case "MID2":
+                    AudioManager.Instance.PlayAudio("EMeterBasic");
+                    break;
+                case "MID3":
+                    AudioManager.Instance.PlayAudio("EMeterAdvance");
+                    break;
+                case "in2visible":
+                    AudioManager.Instance.PlayAudio("EMeterPremium");
+                    break;
+                case "CID1":
+                    AudioManager.Instance.PlayAudio("ECIDBasic");
+                    break;
+                case "CID2":
+                    AudioManager.Instance.PlayAudio("ECIDAdvance1");
+                    break;
+                case "CID_2b":
+                    AudioManager.Instance.PlayAudio("ECIDAdvance2");
+                    break;
+                case "CID3":
+                    AudioManager.Instance.PlayAudio("ECIDPremium");
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if (PlayerPrefsManager.Load("Language") == "Japanese")
+        {
+            switch (mainBox.name)
+            {
+                case "MID2":
+                    AudioManager.Instance.PlayAudio("JMeterBasic");
+                    break;
+                case "MID3":
+                    AudioManager.Instance.PlayAudio("JMeterAdvance");
+                    break;
+                case "in2visible":
+                    AudioManager.Instance.PlayAudio("JMeterPremium");
+                    break;
+                case "CID1":
+                    AudioManager.Instance.PlayAudio("JCIDBasic");
+                    break;
+                case "CID2":
+                    AudioManager.Instance.PlayAudio("JCIDAdvance1");
+                    break;
+                case "CID_2b":
+                    AudioManager.Instance.PlayAudio("JCIDAdvance2");
+                    break;
+                case "CID3":
+                    AudioManager.Instance.PlayAudio("JCIDPremium");
+                    break;
+                default:
+                    break;
+            }
+        }
+
         mainBox.SetActive(true);
         circleFill.fillAmount = 0;
         foreach (var option in otherOptions)
@@ -70,15 +129,15 @@ public class PopupOption : MonoBehaviour, ILaserOption
 
     public void LaserEnter()
     {
-        meshRenderer.material.EnableKeyword("_EMISSION");
-        if (mainBox.name == "in2visible")
+        if (mainBox.name == "in2visible" || mainBox.name == "CID1")
         {
-            meshRenderer.material.SetColor("_EmissionColor", new Color(1, 0.8f, 0, 0.1f));
+            meshRenderer.material.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 0.25f);
         }
         else
         {
-            meshRenderer.material.SetColor("_EmissionColor", new Color(1, 0.8f, 0, 0.25f));
+            meshRenderer.material.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 1.5f);
         }
+        meshRenderer.material.EnableKeyword("_EMISSION");
     }
     public void LaserExit()
     {
