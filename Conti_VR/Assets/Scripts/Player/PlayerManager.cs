@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Valve.VR.Extras;
 
 public class PlayerManager : MonoBehaviour
@@ -21,6 +22,11 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MenuScene");
+        }
+
         if (vrCam.transform.localPosition != Vector3.zero && !heightSet)
         {
             float heightDiff = 1.1f - vrCam.transform.localPosition.y;
