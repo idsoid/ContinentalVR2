@@ -160,13 +160,13 @@ public class ClusterOption : MonoBehaviour, ILaserOption
         {
             switch (listIndicator)
             {
-                case 1:
+                case 0:
                     AudioManager.Instance.PlayAudio("EMeterBasic");
                     break;
-                case 2:
+                case 1:
                     AudioManager.Instance.PlayAudio("EMeterAdvance");
                     break;
-                case 3:
+                case 2:
                     AudioManager.Instance.PlayAudio("EMeterPremium");
                     break;
                 default:
@@ -177,13 +177,13 @@ public class ClusterOption : MonoBehaviour, ILaserOption
         {
             switch (listIndicator)
             {
-                case 1:
+                case 0:
                     AudioManager.Instance.PlayAudio("JMeterBasic");
                     break;
-                case 2:
+                case 1:
                     AudioManager.Instance.PlayAudio("JMeterAdvance");
                     break;
-                case 3:
+                case 2:
                     AudioManager.Instance.PlayAudio("JMeterPremium");
                     break;
                 default:

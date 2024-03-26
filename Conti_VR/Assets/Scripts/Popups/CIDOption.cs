@@ -151,16 +151,16 @@ public class CIDOption : MonoBehaviour, ILaserOption
         {
             switch (listIndicator)
             {
-                case 1:
+                case 0:
                     AudioManager.Instance.PlayAudio("ECIDBasic");
                     break;
-                case 2:
+                case 1:
                     AudioManager.Instance.PlayAudio("ECIDAdvance1");
                     break;
-                case 3:
+                case 2:
                     AudioManager.Instance.PlayAudio("ECIDAdvance2");
                     break;
-                case 4:
+                case 3:
                     AudioManager.Instance.PlayAudio("ECIDPremium");
                     break;
                 default:
@@ -171,16 +171,16 @@ public class CIDOption : MonoBehaviour, ILaserOption
         {
             switch (listIndicator)
             {
-                case 1:
+                case 0:
                     AudioManager.Instance.PlayAudio("JCIDBasic");
                     break;
-                case 2:
+                case 1:
                     AudioManager.Instance.PlayAudio("JCIDAdvance1");
                     break;
-                case 3:
+                case 2:
                     AudioManager.Instance.PlayAudio("JCIDAdvance2");
                     break;
-                case 4:
+                case 3:
                     AudioManager.Instance.PlayAudio("JCIDPremium");
                     break;
                 default:

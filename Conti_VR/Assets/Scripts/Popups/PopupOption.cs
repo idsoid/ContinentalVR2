@@ -44,6 +44,8 @@ public class PopupOption : MonoBehaviour, ILaserOption
         }
         if (circleFill.fillAmount >= 1)
         {
+            PlaySelectedAudio();
+
             mainBox.SetActive(true);
             circleFill.fillAmount = 0;
             foreach (var option in otherOptions)
@@ -57,6 +59,37 @@ public class PopupOption : MonoBehaviour, ILaserOption
 
     //Laser Functions
     public void LaserClick()
+    {
+        PlaySelectedAudio();
+
+        mainBox.SetActive(true);
+        circleFill.fillAmount = 0;
+        foreach (var option in otherOptions)
+        {
+            option.GetComponent<PopupOption>().mainBox.SetActive(false);
+            option.SetActive(false);
+        }
+        gameObject.SetActive(false);
+    }
+    public void LaserEnter()
+    {
+        if (mainBox.name == "in2visible" || mainBox.name == "CID1")
+        {
+            meshRenderer.material.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 0.25f);
+        }
+        else
+        {
+            meshRenderer.material.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 1.5f);
+        }
+        meshRenderer.material.EnableKeyword("_EMISSION");
+    }
+    public void LaserExit()
+    {
+        meshRenderer.material.DisableKeyword("_EMISSION");
+    }
+
+    //Audio Functions
+    private void PlaySelectedAudio()
     {
         if (PlayerPrefsManager.Load("Language") == "English")
         {
@@ -116,31 +149,5 @@ public class PopupOption : MonoBehaviour, ILaserOption
                     break;
             }
         }
-
-        mainBox.SetActive(true);
-        circleFill.fillAmount = 0;
-        foreach (var option in otherOptions)
-        {
-            option.GetComponent<PopupOption>().mainBox.SetActive(false);
-            option.SetActive(false);
-        }
-        gameObject.SetActive(false);
-    }
-
-    public void LaserEnter()
-    {
-        if (mainBox.name == "in2visible" || mainBox.name == "CID1")
-        {
-            meshRenderer.material.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 0.25f);
-        }
-        else
-        {
-            meshRenderer.material.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 1.5f);
-        }
-        meshRenderer.material.EnableKeyword("_EMISSION");
-    }
-    public void LaserExit()
-    {
-        meshRenderer.material.DisableKeyword("_EMISSION");
     }
 }
