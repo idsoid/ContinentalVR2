@@ -143,6 +143,7 @@ public class ClusterOption : MonoBehaviour, ILaserOption
                 listIndicator = 0;
             }
             clusterOptions[listIndicator].SetActive(true);
+            PlaySelectedAudio();
         }
         else if (swipeDir < -0.06f)
         {
@@ -154,8 +155,49 @@ public class ClusterOption : MonoBehaviour, ILaserOption
                 listIndicator = clusterOptions.Count - 1;
             }
             clusterOptions[listIndicator].SetActive(true);
+            PlaySelectedAudio();
         }
+    }
+    IEnumerator HandReady()
+    {
+        yield return new WaitForSeconds(1.1f);
+        handReady = true;
+        handLeft = false;
+    }
 
+    //Laser Functions
+    public void LaserClick()
+    {
+        for (int i = 0; i < popupOptions.Count; i++)
+        {
+            popupOptions[i].SetActive(true);
+        }
+    }
+    public void LaserEnter()
+    {
+        if (!popupOptions[0].activeSelf)
+        {
+            var mat = clusterMesh[listIndicator].material;
+            if (listIndicator == 2)
+            {
+                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 0.25f);
+            }
+            else
+            {
+                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 1.5f);
+            }
+            mat.EnableKeyword("_EMISSION");
+        }
+    }
+    public void LaserExit()
+    {
+        var mat = clusterMesh[listIndicator].material;
+        mat.DisableKeyword("_EMISSION");
+    }
+
+    //Audio functions
+    private void PlaySelectedAudio()
+    {
         if (PlayerPrefsManager.Load("Language") == "English")
         {
             switch (listIndicator)
@@ -190,41 +232,5 @@ public class ClusterOption : MonoBehaviour, ILaserOption
                     break;
             }
         }
-    }
-    IEnumerator HandReady()
-    {
-        yield return new WaitForSeconds(1.1f);
-        handReady = true;
-        handLeft = false;
-    }
-
-    //Laser functions
-    public void LaserClick()
-    {
-        for (int i = 0; i < popupOptions.Count; i++)
-        {
-            popupOptions[i].SetActive(true);
-        }
-    }
-    public void LaserEnter()
-    {
-        if (!popupOptions[0].activeSelf)
-        {
-            var mat = clusterMesh[listIndicator].material;
-            if (listIndicator == 2)
-            {
-                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 0.25f);
-            }
-            else
-            {
-                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 1.5f);
-            }
-            mat.EnableKeyword("_EMISSION");
-        }
-    }
-    public void LaserExit()
-    {
-        var mat = clusterMesh[listIndicator].material;
-        mat.DisableKeyword("_EMISSION");
     }
 }

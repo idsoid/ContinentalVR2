@@ -134,6 +134,7 @@ public class CIDOption : MonoBehaviour, ILaserOption
                 listIndicator = 0;
             }
             cidOptions[listIndicator].SetActive(true);
+            PlaySelectedAudio();
         }
         else if (swipeDir < -0.06f)
         {
@@ -145,8 +146,49 @@ public class CIDOption : MonoBehaviour, ILaserOption
                 listIndicator = cidOptions.Count - 1;
             }
             cidOptions[listIndicator].SetActive(true);
+            PlaySelectedAudio();
         }
+    }
+    IEnumerator HandReady()
+    {
+        yield return new WaitForSeconds(1.1f);
+        handReady = true;
+        handLeft = false;
+    }
 
+    //Laser Functions
+    public void LaserClick()
+    {
+        for (int i = 0; i < popupOptions.Count; i++)
+        {
+            popupOptions[i].SetActive(true);
+        }
+    }
+    public void LaserEnter()
+    {
+        if (!popupOptions[0].activeSelf)
+        {
+            var mat = cidMesh[listIndicator].material;
+            if (listIndicator == 0)
+            {
+                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 0.25f);
+            }
+            else
+            {
+                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 1.5f);
+            }
+            mat.EnableKeyword("_EMISSION");
+        }
+    }
+    public void LaserExit()
+    {
+        var mat = cidMesh[listIndicator].material;
+        mat.DisableKeyword("_EMISSION");
+    }
+
+    //Audio Functions
+    private void PlaySelectedAudio()
+    {
         if (PlayerPrefsManager.Load("Language") == "English")
         {
             switch (listIndicator)
@@ -187,41 +229,5 @@ public class CIDOption : MonoBehaviour, ILaserOption
                     break;
             }
         }
-    }
-    IEnumerator HandReady()
-    {
-        yield return new WaitForSeconds(1.1f);
-        handReady = true;
-        handLeft = false;
-    }
-
-    //Laser functions
-    public void LaserClick()
-    {
-        for (int i = 0; i < popupOptions.Count; i++)
-        {
-            popupOptions[i].SetActive(true);
-        }
-    }
-    public void LaserEnter()
-    {
-        if (!popupOptions[0].activeSelf)
-        {
-            var mat = cidMesh[listIndicator].material;
-            if (listIndicator == 0)
-            {
-                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 0.25f);
-            }
-            else
-            {
-                mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 1.5f);
-            }
-            mat.EnableKeyword("_EMISSION");
-        }
-    }
-    public void LaserExit()
-    {
-        var mat = cidMesh[listIndicator].material;
-        mat.DisableKeyword("_EMISSION");
     }
 }

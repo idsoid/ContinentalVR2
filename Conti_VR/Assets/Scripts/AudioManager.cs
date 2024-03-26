@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private List<AudioSource> audioSources = new();
     private List<string> audiosToPlay;
+    private List<string> audiosPlayed = new();
 
     void Start()
     {
@@ -35,6 +36,10 @@ public class AudioManager : MonoBehaviour
             }
         }
         WelcomeAudio();
+        foreach (var audio in audiosPlayed)
+        {
+            Debug.Log(audio);
+        }
     }
 
     private void WelcomeAudio()
@@ -203,18 +208,23 @@ public class AudioManager : MonoBehaviour
             {
                 if (audiosToPlay[i] == audioSources[j].gameObject.name)
                 {
-                    audiosQueued.Add(audioSources[j].GetComponent<AudioSource>());
+                    audiosQueued.Add(audioSources[j]);
                     break;
                 }
             }
         }
-        Debug.Log(audiosQueued.Count);
 
         for (int i = 0; i < audiosQueued.Count; i++)
         {
+            if (audiosPlayed.Contains(audiosQueued[i].gameObject.name))
+            {
+                continue;
+            }
+
             audiosQueued[i].PlayDelayed(1.0f);
+            audiosPlayed.Add(audiosQueued[i].gameObject.name);
             yield return new WaitForSeconds(audiosQueued[i].clip.length + 1.5f);
-            if (audiosQueued[i].name == "ECIDAdvance1" || audiosQueued[i].name == "JCIDAdvance1")
+            if (audiosQueued[i].gameObject.name == "ECIDAdvance1" || audiosQueued[i].gameObject.name == "JCIDAdvance1")
             {
                 questionPopup.SetActive(true);
             }
@@ -234,7 +244,7 @@ public class AudioManager : MonoBehaviour
         //Play audio by name
         foreach (var audio in audioSources)
         {
-            if (audio.gameObject.name == audioName)
+            if (audio.gameObject.name == audioName && !audiosPlayed.Contains(audioName))
             {
                 audio.PlayDelayed(1.0f);
                 break;
