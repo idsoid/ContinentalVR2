@@ -23,10 +23,17 @@ public class AudioManager : MonoBehaviour
     private GameObject questionPopup;
     [SerializeField]
     private List<AudioSource> audioSources = new();
-    private List<string> audiosToPlay;
+    private List<string> audiosToPlay = new();
     private List<string> audiosPlayed = new();
 
     void Start()
+    {
+        audiosToPlay.Clear();
+        audiosPlayed.Clear();
+        WelcomeAudio();
+    }
+
+    private void WelcomeAudio()
     {
         foreach (var audio in audioSources)
         {
@@ -35,15 +42,7 @@ public class AudioManager : MonoBehaviour
                 audio.Stop();
             }
         }
-        WelcomeAudio();
-        foreach (var audio in audiosPlayed)
-        {
-            Debug.Log(audio);
-        }
-    }
 
-    private void WelcomeAudio()
-    {
         if (PlayerPrefsManager.Load("Language") == "English")
         {
             switch (PlayerPrefsManager.Load("Cluster"))
@@ -218,7 +217,7 @@ public class AudioManager : MonoBehaviour
         {
             if (audiosPlayed.Contains(audiosQueued[i].gameObject.name))
             {
-                continue;
+                break;
             }
 
             audiosQueued[i].PlayDelayed(1.0f);
@@ -244,7 +243,7 @@ public class AudioManager : MonoBehaviour
         //Play audio by name
         foreach (var audio in audioSources)
         {
-            if (audio.gameObject.name == audioName && !audiosPlayed.Contains(audioName))
+            if (audio.gameObject.name == audioName)
             {
                 audio.PlayDelayed(1.0f);
                 break;

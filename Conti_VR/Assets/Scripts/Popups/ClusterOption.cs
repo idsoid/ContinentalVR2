@@ -35,21 +35,21 @@ public class ClusterOption : MonoBehaviour, ILaserOption
             SaveHandPos(other);
         }
     }
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Hand") && !handReady && !popupOptions[0].activeSelf && !circleCanvas.gameObject.activeSelf)
-        {
-            if (handInTimer > 0)
-            {
-                handInTimer -= Time.deltaTime;
-            }
-            else if (handInTimer <= 0)
-            {
-                handInTimer = 1.25f;
-                circleCanvas.gameObject.SetActive(true);
-            }
-        }
-    }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.CompareTag("Hand") && !handReady && !popupOptions[0].activeSelf && !circleCanvas.gameObject.activeSelf)
+    //    {
+    //        if (handInTimer > 0)
+    //        {
+    //            handInTimer -= Time.deltaTime;
+    //        }
+    //        else if (handInTimer <= 0)
+    //        {
+    //            handInTimer = 1.25f;
+    //            circleCanvas.gameObject.SetActive(true);
+    //        }
+    //    }
+    //}
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Hand") && !popupOptions[0].activeSelf && !handLeft)
@@ -91,21 +91,21 @@ public class ClusterOption : MonoBehaviour, ILaserOption
     }
     void Update()
     {
-        Debug.Log("handInTimer: " + handInTimer);
+        //Debug.Log("handInTimer: " + handInTimer);
 
-        if (circleCanvas.gameObject.activeSelf)
-        {
-            circleFill.fillAmount += Time.deltaTime;
-        }
-        if (circleFill.fillAmount >= 1)
-        {
-            circleCanvas.gameObject.SetActive(false);
-            circleFill.fillAmount = 0;
-            for (int i = 0; i < popupOptions.Count; i++)
-            {
-                popupOptions[i].SetActive(true);
-            }
-        }
+        //if (circleCanvas.gameObject.activeSelf)
+        //{
+        //    circleFill.fillAmount += Time.deltaTime;
+        //}
+        //if (circleFill.fillAmount >= 1)
+        //{
+        //    circleCanvas.gameObject.SetActive(false);
+        //    circleFill.fillAmount = 0;
+        //    for (int i = 0; i < popupOptions.Count; i++)
+        //    {
+        //        popupOptions[i].SetActive(true);
+        //    }
+        //}
 
         for (int i = 0; i < clusterOptions.Count; i++)
         {
@@ -133,7 +133,7 @@ public class ClusterOption : MonoBehaviour, ILaserOption
     private void CheckSwipe(Collider hand)
     {
         float swipeDir = handPosY - hand.transform.position.y;
-        if (swipeDir > 0.06f)
+        if (swipeDir > 0.04f)
         {
             Debug.Log("Swiped down");
             clusterOptions[listIndicator].SetActive(false);
@@ -145,7 +145,7 @@ public class ClusterOption : MonoBehaviour, ILaserOption
             clusterOptions[listIndicator].SetActive(true);
             PlaySelectedAudio();
         }
-        else if (swipeDir < -0.06f)
+        else if (swipeDir < -0.04f)
         {
             Debug.Log("Swiped up");
             clusterOptions[listIndicator].SetActive(false);

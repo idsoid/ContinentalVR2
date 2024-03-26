@@ -17,16 +17,13 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
+        laserPointer.active = false;
+        laserPointer.pointer.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MenuScene");
-        }
-
         if (vrCam.transform.localPosition != Vector3.zero && !heightSet)
         {
             float heightDiff = 1.1f - vrCam.transform.localPosition.y;

@@ -29,6 +29,8 @@ namespace Valve.VR.Extras
 
         private void Start()
         {
+            //active = false;
+
             if (pose == null)
                 pose = this.GetComponent<SteamVR_Behaviour_Pose>();
             if (pose == null)

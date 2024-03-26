@@ -1271,7 +1271,7 @@ MonoBehaviour:
   interactWithUI:
     actionPath: /actions/default/in/InteractUI
     needsReinit: 0
-  active: 0
+  active: 1
   color: {r: 1, g: 0.80166054, b: 0, a: 0}
   thickness: 0.001
   clickColor: {r: 1, g: 0.6736357, b: 0, a: 1}
