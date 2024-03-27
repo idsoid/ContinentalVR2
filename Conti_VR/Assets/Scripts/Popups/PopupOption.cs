@@ -14,6 +14,8 @@ public class PopupOption : MonoBehaviour, ILaserOption
     [SerializeField]
     private List<GameObject> otherOptions = new();
     public GameObject mainBox;
+    private AudioManager audioManager;
+    private bool firstTime = true;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -35,6 +37,7 @@ public class PopupOption : MonoBehaviour, ILaserOption
     {
         circleCanvas.gameObject.SetActive(false);
         circleFill.fillAmount = 0;
+        audioManager = AudioManager.Instance;
     }
     void Update()
     {
@@ -96,25 +99,34 @@ public class PopupOption : MonoBehaviour, ILaserOption
             switch (mainBox.name)
             {
                 case "MID2":
-                    AudioManager.Instance.PlayAudio("EMeterBasic");
+                    audioManager.PlayAudio("EMeterBasic");
                     break;
                 case "MID3":
-                    AudioManager.Instance.PlayAudio("EMeterAdvance");
+                    audioManager.PlayAudio("EMeterAdvance");
                     break;
                 case "in2visible":
-                    AudioManager.Instance.PlayAudio("EMeterPremium");
+                    audioManager.PlayAudio("EMeterPremium");
                     break;
                 case "CID1":
-                    AudioManager.Instance.PlayAudio("ECIDBasic");
+                    audioManager.PlayAudio("ECIDBasic");
                     break;
                 case "CID2":
-                    AudioManager.Instance.PlayAudio("ECIDAdvance1");
+                    if (firstTime)
+                    {
+                        List<string> audiosToPlay = new() { "ECIDAdvance1", "ECIDAdvanceQuestion" };
+                        audioManager.QueueAudios(audiosToPlay);
+                        firstTime = false;
+                    }
+                    else
+                    {
+                        audioManager.PlayAudio("ECIDAdvance1");
+                    }
                     break;
                 case "CID_2b":
-                    AudioManager.Instance.PlayAudio("ECIDAdvance2");
+                    audioManager.PlayAudio("ECIDAdvance2");
                     break;
                 case "CID3":
-                    AudioManager.Instance.PlayAudio("ECIDPremium");
+                    audioManager.PlayAudio("ECIDPremium");
                     break;
                 default:
                     break;
@@ -125,25 +137,34 @@ public class PopupOption : MonoBehaviour, ILaserOption
             switch (mainBox.name)
             {
                 case "MID2":
-                    AudioManager.Instance.PlayAudio("JMeterBasic");
+                    audioManager.PlayAudio("JMeterBasic");
                     break;
                 case "MID3":
-                    AudioManager.Instance.PlayAudio("JMeterAdvance");
+                    audioManager.PlayAudio("JMeterAdvance");
                     break;
                 case "in2visible":
-                    AudioManager.Instance.PlayAudio("JMeterPremium");
+                    audioManager.PlayAudio("JMeterPremium");
                     break;
                 case "CID1":
-                    AudioManager.Instance.PlayAudio("JCIDBasic");
+                    audioManager.PlayAudio("JCIDBasic");
                     break;
                 case "CID2":
-                    AudioManager.Instance.PlayAudio("JCIDAdvance1");
+                    if (firstTime)
+                    {
+                        List<string> audiosToPlay = new() { "JCIDAdvance1", "JCIDAdvanceQuestion" };
+                        audioManager.QueueAudios(audiosToPlay);
+                        firstTime = false;
+                    }
+                    else
+                    {
+                        audioManager.PlayAudio("JCIDAdvance1");
+                    }
                     break;
                 case "CID_2b":
-                    AudioManager.Instance.PlayAudio("JCIDAdvance2");
+                    audioManager.PlayAudio("JCIDAdvance2");
                     break;
                 case "CID3":
-                    AudioManager.Instance.PlayAudio("JCIDPremium");
+                    audioManager.PlayAudio("JCIDPremium");
                     break;
                 default:
                     break;

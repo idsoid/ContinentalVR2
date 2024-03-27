@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class AudioManager : MonoBehaviour
     }
 
     [SerializeField]
+    private Toggle mute;
+    [SerializeField]
     private GameObject questionPopup;
     [SerializeField]
     private List<AudioSource> audioSources = new();
@@ -30,7 +33,23 @@ public class AudioManager : MonoBehaviour
     {
         audiosToPlay.Clear();
         audiosPlayed.Clear();
-        WelcomeAudio();
+        //WelcomeAudio();
+    }
+
+    void Update()
+    {
+        foreach (var audio in audioSources)
+        {
+            audio.mute = mute.isOn;
+        }
+
+        foreach (var audio in audioSources)
+        {
+            if (audio.isPlaying)
+            {
+
+            }
+        }
     }
 
     private void WelcomeAudio()
@@ -198,6 +217,10 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
+    public void QueueAudios(List<string> audios)
+    {
+        StartCoroutine(PlayAudioSequence(audios));
+    }
     public IEnumerator PlayAudioSequence(List<string> audiosToPlay)
     {
         List<AudioSource> audiosQueued = new();
@@ -215,16 +238,17 @@ public class AudioManager : MonoBehaviour
 
         for (int i = 0; i < audiosQueued.Count; i++)
         {
-            if (audiosPlayed.Contains(audiosQueued[i].gameObject.name))
-            {
-                break;
-            }
+            //if (audiosPlayed.Contains(audiosQueued[i].gameObject.name))
+            //{
+            //    break;
+            //}
 
-            audiosQueued[i].PlayDelayed(1.0f);
-            audiosPlayed.Add(audiosQueued[i].gameObject.name);
-            yield return new WaitForSeconds(audiosQueued[i].clip.length + 1.5f);
+            audiosQueued[i].Play();
+            //audiosPlayed.Add(audiosQueued[i].gameObject.name);
+            yield return new WaitForSecondsRealtime(audiosQueued[i].clip.length + 1f);
             if (audiosQueued[i].gameObject.name == "ECIDAdvance1" || audiosQueued[i].gameObject.name == "JCIDAdvance1")
             {
+                Debug.Log("test");
                 questionPopup.SetActive(true);
             }
         }
@@ -237,6 +261,7 @@ public class AudioManager : MonoBehaviour
             if (audio.isPlaying)
             {
                 audio.Stop();
+                break;
             }
         }
 
@@ -245,7 +270,7 @@ public class AudioManager : MonoBehaviour
         {
             if (audio.gameObject.name == audioName)
             {
-                audio.PlayDelayed(1.0f);
+                audio.Play();
                 break;
             }
         }

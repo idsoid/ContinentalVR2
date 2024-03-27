@@ -17,8 +17,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
-        laserPointer.active = false;
-        laserPointer.pointer.SetActive(false);
+        laserPointer.enabled = false;
     }
 
     // Update is called once per frame
@@ -29,10 +28,18 @@ public class PlayerManager : MonoBehaviour
             float heightDiff = 1.1f - vrCam.transform.localPosition.y;
             transform.position = new Vector3(0, transform.position.y + heightDiff, 0);
             heightSet = true;
+            laserPointer.active = false;
             gameManager.ResetOrientation();
         }
 
-        laserPointer.active = gameManager.GetLaser();
+        if (!laserPointer.enabled)
+        {
+            laserPointer.enabled = gameManager.GetLaser();
+        }
+        else if (laserPointer.enabled)
+        {
+            laserPointer.active = gameManager.GetLaser();
+        }
         UpdateHeight();
     }
 

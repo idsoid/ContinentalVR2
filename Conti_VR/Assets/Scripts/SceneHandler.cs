@@ -39,6 +39,9 @@ public class SceneHandler : MonoBehaviour
             case "Toggle":
                 target.GetComponent<Toggle>().isOn = true;
                 break;
+            case "Mute":
+                target.GetComponent<Toggle>().isOn = !target.GetComponent<Toggle>().isOn;
+                break;
             case "Option":
                 target.GetComponent<ILaserOption>().LaserClick();
                 break;
@@ -60,6 +63,11 @@ public class SceneHandler : MonoBehaviour
                 toggleColorBlock.normalColor = Color.grey;
                 target.GetComponent<Toggle>().colors = toggleColorBlock;
                 break;
+            case "Mute":
+                ColorBlock muteColorBlock = target.GetComponent<Toggle>().colors;
+                muteColorBlock.normalColor = Color.grey;
+                target.GetComponent<Toggle>().colors = muteColorBlock;
+                break;
             case "Option":
                 target.GetComponent<ILaserOption>().LaserEnter();
                 break;
@@ -80,6 +88,11 @@ public class SceneHandler : MonoBehaviour
                 ColorBlock toggleColorBlock = target.GetComponent<Toggle>().colors;
                 toggleColorBlock.normalColor = Color.white;
                 target.GetComponent<Toggle>().colors = toggleColorBlock;
+                break;
+            case "Mute":
+                ColorBlock muteColorBlock = target.GetComponent<Toggle>().colors;
+                muteColorBlock.normalColor = Color.white;
+                target.GetComponent<Toggle>().colors = muteColorBlock;
                 break;
             case "Option":
                 target.GetComponent<ILaserOption>().LaserExit();

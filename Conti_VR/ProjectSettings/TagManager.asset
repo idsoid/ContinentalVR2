@@ -11,6 +11,7 @@ TagManager:
   - Option
   - Hand
   - Popup
+  - Mute
   layers:
   - Default
   - TransparentFX
