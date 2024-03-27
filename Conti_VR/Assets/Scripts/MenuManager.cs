@@ -5,14 +5,31 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField]
+    private Transform player, playerCam;
+    private bool heightSet = false;
+
+    [SerializeField]
     private ToggleGroup languageChoice, clusterChoice, cidChoice;
 
     [SerializeField]
     private Image logoSprite, logoBackground;
     private float logoTimer = 6.0f;
-    
+
+    void Start()
+    {
+        float offsetAngle = playerCam.rotation.eulerAngles.y;
+        player.Rotate(0f, -offsetAngle, 0f);
+    }
+
     void Update()
     {
+        if (playerCam.transform.localPosition != Vector3.zero && !heightSet)
+        {
+            float offsetAngle = playerCam.rotation.eulerAngles.y;
+            player.Rotate(0f, -offsetAngle, 0f);
+            heightSet = true;
+        }
+
         if (logoTimer > 0 && logoSprite.IsActive())
         {
             logoTimer -= Time.deltaTime;

@@ -33,7 +33,7 @@ public class AudioManager : MonoBehaviour
     {
         audiosToPlay.Clear();
         audiosPlayed.Clear();
-        //WelcomeAudio();
+        WelcomeAudio();
     }
 
     void Update()
@@ -41,14 +41,6 @@ public class AudioManager : MonoBehaviour
         foreach (var audio in audioSources)
         {
             audio.mute = mute.isOn;
-        }
-
-        foreach (var audio in audioSources)
-        {
-            if (audio.isPlaying)
-            {
-
-            }
         }
     }
 
