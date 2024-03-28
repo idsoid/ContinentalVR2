@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using Valve.VR;
 
@@ -83,7 +84,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    //Reset Player
+    //Player Functions
     public void ResetOrientation()
     {
         if ((steamCamera != null) && (cameraRig != null))
@@ -106,5 +107,13 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Error: SteamVR objects not found!");
         }
+    }
+    public void EndSimulation()
+    {
+        if (EditorApplication.isPlaying)
+        {
+            EditorApplication.isPlaying = false;
+        }
+        Application.Quit();
     }
 }
