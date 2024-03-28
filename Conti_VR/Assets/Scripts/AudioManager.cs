@@ -27,17 +27,25 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private List<AudioSource> audioSources = new();
     private List<string> audiosToPlay = new();
-    private List<string> audiosPlayed = new();
+    private IEnumerator audioCoroutine;
 
     void Start()
     {
         audiosToPlay.Clear();
-        audiosPlayed.Clear();
         WelcomeAudio();
+        StartCoroutine(audioCoroutine);
     }
 
     void Update()
     {
+        foreach (var audio in audioSources)
+        {
+            if (audio.isPlaying)
+            {
+                Debug.Log(audio.name);
+            }
+        }
+
         foreach (var audio in audioSources)
         {
             audio.mute = mute.isOn;
@@ -63,19 +71,19 @@ public class AudioManager : MonoBehaviour
                     {
                         case "Basic":
                             audiosToPlay = new() { "EBasicBasic", "EMeterBasic", "ECIDBasic" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Advance 1":
                             audiosToPlay = new() { "EBasicAdvance1", "EMeterBasic", "ECIDAdvance1", "ECIDAdvanceQuestion" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Advance 2":
                             audiosToPlay = new() { "EBasicAdvance2", "EMeterBasic", "ECIDAdvance2" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Premium":
                             audiosToPlay = new() { "EBasicPremium", "EMeterBasic", "ECIDPremium" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         default:
                             break;
@@ -86,19 +94,19 @@ public class AudioManager : MonoBehaviour
                     {
                         case "Basic":
                             audiosToPlay = new() { "EAdvanceBasic", "EMeterAdvance", "ECIDBasic" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Advance 1":
                             audiosToPlay = new() { "EAdvanceAdvance1", "EMeterAdvance", "ECIDAdvance1", "ECIDAdvanceQuestion" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Advance 2":
                             audiosToPlay = new() { "EAdvanceAdvance2", "EMeterAdvance", "ECIDAdvance2" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Premium":
                             audiosToPlay = new() { "EAdvancePremium", "EMeterAdvance", "ECIDPremium" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         default:
                             break;
@@ -109,19 +117,19 @@ public class AudioManager : MonoBehaviour
                     {
                         case "Basic":
                             audiosToPlay = new() { "EPremiumBasic", "EMeterPremium", "ECIDBasic" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Advance 1":
                             audiosToPlay = new() { "EPremiumActive1", "EMeterPremium", "ECIDAdvance1", "ECIDAdvanceQuestion" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Advance 2":
                             audiosToPlay = new() { "EPremiumActive2", "EMeterPremium", "ECIDAdvance2" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Premium":
                             audiosToPlay = new() { "EPremiumPremium", "EMeterPremium", "ECIDPremium" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         default:
                             break;
@@ -140,19 +148,19 @@ public class AudioManager : MonoBehaviour
                     {
                         case "Basic":
                             audiosToPlay = new() { "JBasicBasic", "JMeterBasic", "JCIDBasic" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Advance 1":
                             audiosToPlay = new() { "JBasicAdvance1", "JMeterBasic", "JCIDAdvance1", "JCIDAdvanceQuestion" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Advance 2":
                             audiosToPlay = new() { "JBasicAdvance2", "JMeterBasic", "JCIDAdvance2" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Premium":
                             audiosToPlay = new() { "JBasicPremium", "JMeterBasic", "JCIDPremium" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         default:
                             break;
@@ -163,19 +171,19 @@ public class AudioManager : MonoBehaviour
                     {
                         case "Basic":
                             audiosToPlay = new() { "JAdvanceBasic", "JMeterAdvance", "JCIDBasic" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Advance 1":
                             audiosToPlay = new() { "JAdvanceAdvance1", "JMeterAdvance", "JCIDAdvance1", "JCIDAdvanceQuestion" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Advance 2":
                             audiosToPlay = new() { "JAdvanceAdvance2", "JMeterAdvance", "JCIDAdvance2" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Premium":
                             audiosToPlay = new() { "JAdvancePremium", "JMeterAdvance", "JCIDPremium" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         default:
                             break;
@@ -186,19 +194,19 @@ public class AudioManager : MonoBehaviour
                     {
                         case "Basic":
                             audiosToPlay = new() { "JPremiumBasic", "JMeterPremium", "JCIDBasic" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Advance 1":
                             audiosToPlay = new() { "JPremiumActive1", "JMeterPremium", "JCIDAdvance1", "JCIDAdvanceQuestion" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Advance 2":
                             audiosToPlay = new() { "JPremiumActive2", "JMeterPremium", "JCIDAdvance2" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         case "Premium":
                             audiosToPlay = new() { "JPremiumPremium", "JMeterPremium", "JCIDPremium" };
-                            StartCoroutine(PlayAudioSequence(audiosToPlay));
+                            audioCoroutine = PlayAudioSequence(audiosToPlay);
                             break;
                         default:
                             break;
@@ -215,6 +223,13 @@ public class AudioManager : MonoBehaviour
     }
     public IEnumerator PlayAudioSequence(List<string> audiosToPlay)
     {
+        //Check if an audio is playing
+        StopCoroutine(audioCoroutine);
+        for (int i = 0; i < audioSources.Count; i++)
+        {
+            audioSources[i].Stop();
+        }
+
         List<AudioSource> audiosQueued = new();
         for (int i = 0; i < audiosToPlay.Count; i++)
         {
@@ -230,13 +245,7 @@ public class AudioManager : MonoBehaviour
 
         for (int i = 0; i < audiosQueued.Count; i++)
         {
-            //if (audiosPlayed.Contains(audiosQueued[i].gameObject.name))
-            //{
-            //    break;
-            //}
-
             audiosQueued[i].Play();
-            //audiosPlayed.Add(audiosQueued[i].gameObject.name);
             yield return new WaitForSecondsRealtime(audiosQueued[i].clip.length + 1f);
             if (audiosQueued[i].gameObject.name == "ECIDAdvance1" || audiosQueued[i].gameObject.name == "JCIDAdvance1")
             {
@@ -248,13 +257,10 @@ public class AudioManager : MonoBehaviour
     public void PlayAudio(string audioName)
     {
         //Check if an audio is playing
-        foreach (var audio in audioSources)
+        StopCoroutine(audioCoroutine);
+        for (int i = 0; i < audioSources.Count; i++)
         {
-            if (audio.isPlaying)
-            {
-                audio.Stop();
-                break;
-            }
+            audioSources[i].Stop();
         }
 
         //Play audio by name

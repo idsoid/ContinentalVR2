@@ -110,6 +110,7 @@ public class CIDOption : MonoBehaviour, ILaserOption
         //    }
         //}
 
+        Debug.Log("list indicator: " + listIndicator);
         for (int i = 0; i < cidOptions.Count; i++)
         {
             if (cidOptions[i].activeSelf)
