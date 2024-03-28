@@ -8,7 +8,6 @@ public class CIDOption : MonoBehaviour, ILaserOption
     //Hand variables
     private bool handReady = true;
     private bool handLeft = false;
-    private float handInTimer = 0.0f;
     private float handPosY;
 
     //Object variables
@@ -55,7 +54,6 @@ public class CIDOption : MonoBehaviour, ILaserOption
         if (other.CompareTag("Hand") && !popupOptions[0].activeSelf && !handLeft)
         {
             handLeft = true;
-            handInTimer = 1.25f;
             circleFill.fillAmount = 0;
             circleCanvas.gameObject.SetActive(false);
             CheckSwipe(other);
@@ -67,7 +65,6 @@ public class CIDOption : MonoBehaviour, ILaserOption
     {
         circleCanvas.gameObject.SetActive(false);
         circleFill.fillAmount = 0;
-        handInTimer = 1.25f;
         switch (PlayerPrefsManager.Load("CID"))
         {
             case "Basic":

@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    //Player Functions
+    //Misc Functions
     public void ResetOrientation()
     {
         if ((steamCamera != null) && (cameraRig != null))
