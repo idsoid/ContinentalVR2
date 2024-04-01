@@ -33,7 +33,6 @@ public class AudioManager : MonoBehaviour
     {
         audiosToPlay.Clear();
         WelcomeAudio();
-        StartCoroutine(audioCoroutine);
     }
 
     void Update()
@@ -216,6 +215,8 @@ public class AudioManager : MonoBehaviour
                     break;
             }
         }
+
+        StartCoroutine(audioCoroutine);
     }
     public void QueueAudios(List<string> audios)
     {
@@ -224,7 +225,6 @@ public class AudioManager : MonoBehaviour
     public IEnumerator PlayAudioSequence(List<string> audiosToPlay)
     {
         //Check if an audio is playing
-        StopCoroutine(audioCoroutine);
         for (int i = 0; i < audioSources.Count; i++)
         {
             audioSources[i].Stop();

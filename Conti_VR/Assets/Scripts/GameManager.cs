@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public SteamVR_Action_Vector2 movementInput;
     public SteamVR_Action_Vector2 heightInput;
     public SteamVR_Action_Boolean toggleLaser;
+    public SteamVR_Action_Boolean togglein2visible;
 
     private int languageOption, clusterOption, cidOption;
 
@@ -48,6 +49,12 @@ public class GameManager : MonoBehaviour
     public bool GetLaser()
     {
         return toggleLaser.GetState(SteamVR_Input_Sources.Any);
+    }
+
+    //in2visible
+    public bool Getin2visible()
+    {
+        return togglein2visible.GetState(SteamVR_Input_Sources.Any);
     }
     #endregion
 
@@ -110,10 +117,6 @@ public class GameManager : MonoBehaviour
     }
     public void EndSimulation()
     {
-        if (EditorApplication.isPlaying)
-        {
-            EditorApplication.isPlaying = false;
-        }
         Application.Quit();
     }
 }
