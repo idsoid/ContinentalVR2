@@ -15,16 +15,11 @@ public class ClusterOption : MonoBehaviour, ILaserOption
     private List<GameObject> clusterOptions = new();
     [SerializeField]
     private List<MeshRenderer> clusterMesh = new();
-    private int listIndicator = 0;
-    
-    [SerializeField]
-    private Transform circleCanvas;
-    [SerializeField]
-    private Image circleFill;
     [SerializeField]
     private List<GameObject> popupOptions = new();
     [SerializeField]
     private GameObject defaultStand;
+    private int listIndicator = 0;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -34,28 +29,11 @@ public class ClusterOption : MonoBehaviour, ILaserOption
             SaveHandPos(other);
         }
     }
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.CompareTag("Hand") && !handReady && !popupOptions[0].activeSelf && !circleCanvas.gameObject.activeSelf)
-    //    {
-    //        if (handInTimer > 0)
-    //        {
-    //            handInTimer -= Time.deltaTime;
-    //        }
-    //        else if (handInTimer <= 0)
-    //        {
-    //            handInTimer = 1.25f;
-    //            circleCanvas.gameObject.SetActive(true);
-    //        }
-    //    }
-    //}
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Hand") && !popupOptions[0].activeSelf && !handLeft)
         {
             handLeft = true;
-            circleFill.fillAmount = 0;
-            circleCanvas.gameObject.SetActive(false);
             CheckSwipe(other);
             StartCoroutine(HandReady());
         }
@@ -63,8 +41,6 @@ public class ClusterOption : MonoBehaviour, ILaserOption
 
     void Start()
     {
-        circleCanvas.gameObject.SetActive(false);
-        circleFill.fillAmount = 0;
         switch (PlayerPrefsManager.Load("Cluster"))
         {
             case "Basic":
@@ -88,22 +64,6 @@ public class ClusterOption : MonoBehaviour, ILaserOption
     }
     void Update()
     {
-        //Debug.Log("handInTimer: " + handInTimer);
-
-        //if (circleCanvas.gameObject.activeSelf)
-        //{
-        //    circleFill.fillAmount += Time.deltaTime;
-        //}
-        //if (circleFill.fillAmount >= 1)
-        //{
-        //    circleCanvas.gameObject.SetActive(false);
-        //    circleFill.fillAmount = 0;
-        //    for (int i = 0; i < popupOptions.Count; i++)
-        //    {
-        //        popupOptions[i].SetActive(true);
-        //    }
-        //}
-
         for (int i = 0; i < clusterOptions.Count; i++)
         {
             if (clusterOptions[i].activeSelf)

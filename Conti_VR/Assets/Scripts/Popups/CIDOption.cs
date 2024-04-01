@@ -15,16 +15,11 @@ public class CIDOption : MonoBehaviour, ILaserOption
     private List<GameObject> cidOptions = new();
     [SerializeField]
     private List<MeshRenderer> cidMesh = new();
+    [SerializeField]
+    private List<GameObject> popupOptions = new();
     private int listIndicator = 0;
     private AudioManager audioManager;
     private bool firstTime = true;
-    
-    [SerializeField]
-    private Transform circleCanvas;
-    [SerializeField]
-    private Image circleFill;
-    [SerializeField]
-    private List<GameObject> popupOptions = new();
 
     private void OnTriggerEnter(Collider other)
     {
@@ -34,28 +29,11 @@ public class CIDOption : MonoBehaviour, ILaserOption
             SaveHandPos(other);
         }
     }
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.CompareTag("Hand") && !handReady && !popupOptions[0].activeSelf && !circleCanvas.gameObject.activeSelf)
-    //    {
-    //        if (handInTimer > 0)
-    //        {
-    //            handInTimer -= Time.deltaTime;
-    //        }
-    //        else if (handInTimer <= 0)
-    //        {
-    //            handInTimer = 1.25f;
-    //            circleCanvas.gameObject.SetActive(true);
-    //        }
-    //    }
-    //}
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Hand") && !popupOptions[0].activeSelf && !handLeft)
         {
             handLeft = true;
-            circleFill.fillAmount = 0;
-            circleCanvas.gameObject.SetActive(false);
             CheckSwipe(other);
             StartCoroutine(HandReady());
         }
@@ -63,8 +41,6 @@ public class CIDOption : MonoBehaviour, ILaserOption
 
     void Start()
     {
-        circleCanvas.gameObject.SetActive(false);
-        circleFill.fillAmount = 0;
         switch (PlayerPrefsManager.Load("CID"))
         {
             case "Basic":
@@ -91,23 +67,6 @@ public class CIDOption : MonoBehaviour, ILaserOption
     }
     void Update()
     {
-        //Debug.Log("handInTimer: " + handInTimer);
-
-        //if (circleCanvas.gameObject.activeSelf)
-        //{
-        //    circleFill.fillAmount += Time.deltaTime;
-        //}
-        //if (circleFill.fillAmount >= 1)
-        //{
-        //    circleCanvas.gameObject.SetActive(false);
-        //    circleFill.fillAmount = 0;
-        //    for (int i = 0; i < popupOptions.Count; i++)
-        //    {
-        //        popupOptions[i].SetActive(true);
-        //    }
-        //}
-
-        Debug.Log("list indicator: " + listIndicator);
         for (int i = 0; i < cidOptions.Count; i++)
         {
             if (cidOptions[i].activeSelf)
