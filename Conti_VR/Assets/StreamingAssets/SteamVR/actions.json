@@ -66,6 +66,10 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/Togglein2visible",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
@@ -189,7 +193,8 @@
       "/actions/default/in/TouchPad": "TouchPad",
       "/actions/default/in/Swipe": "Swipe",
       "/actions/default/in/HeightChange": "HeightChange",
-      "/actions/default/in/ToggleLaser": "Toggle Laser"
+      "/actions/default/in/ToggleLaser": "Toggle Laser",
+      "/actions/default/in/Togglein2visible": "Toggle in2visible"
     }
   ]
 }

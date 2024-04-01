@@ -33,7 +33,7 @@ public class PopupOption : MonoBehaviour, ILaserOption
     }
     public void LaserEnter()
     {
-        if (mainBox.name == "in2visible" || mainBox.name == "CID1")
+        if (mainBox.name == "Mainin2visible" || mainBox.name == "CID1")
         {
             meshRenderer.material.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 0.25f);
         }
@@ -61,7 +61,7 @@ public class PopupOption : MonoBehaviour, ILaserOption
                 case "MID3":
                     audioManager.PlayAudio("EMeterAdvance");
                     break;
-                case "in2visible":
+                case "Mainin2visible":
                     audioManager.PlayAudio("EMeterPremium");
                     break;
                 case "CID1":
@@ -99,7 +99,7 @@ public class PopupOption : MonoBehaviour, ILaserOption
                 case "MID3":
                     audioManager.PlayAudio("JMeterAdvance");
                     break;
-                case "in2visible":
+                case "Mainin2visible":
                     audioManager.PlayAudio("JMeterPremium");
                     break;
                 case "CID1":

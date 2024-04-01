@@ -137,6 +137,14 @@ namespace Valve.VR
             }
         }
         
+        public virtual SteamVR_Action_Boolean Togglein2visible
+        {
+            get
+            {
+                return SteamVR_Actions.default_Togglein2visible;
+            }
+        }
+        
         public virtual SteamVR_Action_Vibration Haptic
         {
             get

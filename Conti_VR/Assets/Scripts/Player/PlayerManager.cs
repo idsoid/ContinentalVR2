@@ -11,6 +11,8 @@ public class PlayerManager : MonoBehaviour
     private Transform vrCam;
     [SerializeField]
     private SteamVR_LaserPointer laserPointer;
+    [SerializeField]
+    private GameObject mainin2visible, in2visibleOff, in2visibleOn;
     private bool heightSet = false;
 
     // Start is called before the first frame update
@@ -32,6 +34,7 @@ public class PlayerManager : MonoBehaviour
             gameManager.ResetOrientation();
         }
 
+        //Laser
         if (!laserPointer.enabled)
         {
             laserPointer.enabled = gameManager.GetLaser();
@@ -40,6 +43,14 @@ public class PlayerManager : MonoBehaviour
         {
             laserPointer.active = gameManager.GetLaser();
         }
+
+        //in2visible
+        if (mainin2visible.activeSelf)
+        {
+            in2visibleOff.SetActive(gameManager.Getin2visible());
+            in2visibleOn.SetActive(!gameManager.Getin2visible());
+        }
+
         UpdateHeight();
     }
 

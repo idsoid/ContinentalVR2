@@ -260,6 +260,15 @@
                },
                "mode" : "toggle_button",
                "path" : "/user/hand/right/input/a"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/togglein2visible"
+                  }
+               },
+               "mode" : "toggle_button",
+               "path" : "/user/hand/right/input/b"
             }
          ]
       },

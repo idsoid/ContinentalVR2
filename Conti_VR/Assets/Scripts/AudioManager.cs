@@ -220,7 +220,9 @@ public class AudioManager : MonoBehaviour
     }
     public void QueueAudios(List<string> audios)
     {
-        StartCoroutine(PlayAudioSequence(audios));
+        StopCoroutine(audioCoroutine);
+        audioCoroutine = PlayAudioSequence(audios);
+        StartCoroutine(audioCoroutine);
     }
     public IEnumerator PlayAudioSequence(List<string> audiosToPlay)
     {

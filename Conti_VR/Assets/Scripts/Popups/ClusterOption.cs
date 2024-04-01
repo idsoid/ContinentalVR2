@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ClusterOption : MonoBehaviour, ILaserOption
 {
+    private GameManager gameManager;
+
     //Hand variables
     private bool handReady = true;
     private bool handLeft = false;
@@ -13,8 +15,6 @@ public class ClusterOption : MonoBehaviour, ILaserOption
     //Object variables
     [SerializeField]
     private List<GameObject> clusterOptions = new();
-    [SerializeField]
-    private List<MeshRenderer> clusterMesh = new();
     [SerializeField]
     private List<GameObject> popupOptions = new();
     [SerializeField]
@@ -41,6 +41,7 @@ public class ClusterOption : MonoBehaviour, ILaserOption
 
     void Start()
     {
+        gameManager = GameManager.Instance;
         switch (PlayerPrefsManager.Load("Cluster"))
         {
             case "Basic":
@@ -134,13 +135,22 @@ public class ClusterOption : MonoBehaviour, ILaserOption
     {
         if (!popupOptions[0].activeSelf)
         {
-            var mat = clusterMesh[listIndicator].material;
+            Material mat;
             if (listIndicator == 2)
             {
+                if (gameManager.Getin2visible())
+                {
+                    mat = clusterOptions[listIndicator].transform.GetChild(1).GetComponent<MeshRenderer>().material;
+                }
+                else
+                {
+                    mat = clusterOptions[listIndicator].transform.GetChild(0).GetComponent<MeshRenderer>().material;
+                }
                 mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 0.25f);
             }
             else
             {
+                mat = clusterOptions[listIndicator].GetComponentInChildren<MeshRenderer>().material;
                 mat.SetColor("_EmissionColor", new Color(1, 0.8f, 0) * 1.5f);
             }
             mat.EnableKeyword("_EMISSION");
@@ -148,7 +158,22 @@ public class ClusterOption : MonoBehaviour, ILaserOption
     }
     public void LaserExit()
     {
-        var mat = clusterMesh[listIndicator].material;
+        Material mat;
+        if (listIndicator == 2)
+        {
+            if (gameManager.Getin2visible())
+            {
+                mat = clusterOptions[listIndicator].transform.GetChild(1).GetComponent<MeshRenderer>().material;
+            }
+            else
+            {
+                mat = clusterOptions[listIndicator].transform.GetChild(0).GetComponent<MeshRenderer>().material;
+            }
+        }
+        else
+        {
+            mat = clusterOptions[listIndicator].GetComponentInChildren<MeshRenderer>().material;
+        }
         mat.DisableKeyword("_EMISSION");
     }
 
