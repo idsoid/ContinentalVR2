@@ -13,6 +13,8 @@ public class PlayerManager : MonoBehaviour
     private SteamVR_LaserPointer laserPointer;
     [SerializeField]
     private GameObject mainin2visible, in2visibleOff, in2visibleOn;
+    [SerializeField]
+    private List<MeshRenderer> meshRenderers = new();
     private bool heightSet = false;
 
     // Start is called before the first frame update
@@ -42,6 +44,14 @@ public class PlayerManager : MonoBehaviour
         else if (laserPointer.enabled)
         {
             laserPointer.active = gameManager.GetLaser();
+        }
+
+        if (!laserPointer.active)
+        {
+            foreach (var meshRenderer in meshRenderers)
+            {
+                meshRenderer.material.DisableKeyword("_EMISSION");
+            }
         }
 
         //in2visible
