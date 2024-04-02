@@ -52,6 +52,11 @@ public class PlayerManager : MonoBehaviour
         }
 
         UpdateHeight();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MenuScene");
+        }
     }
 
     private void UpdateHeight()

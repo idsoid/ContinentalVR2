@@ -325,6 +325,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vrCam: {fileID: 429506}
   laserPointer: {fileID: 1765462486338997327}
+  mainin2visible: {fileID: 0}
+  in2visibleOff: {fileID: 0}
+  in2visibleOn: {fileID: 0}
 --- !u!1 &109154
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,7 +1406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initializeSteamVROnAwake: 1
-  doNotDestroy: 1
+  doNotDestroy: 0
   steamvr_render: {fileID: 0}
 --- !u!114 &11479638
 MonoBehaviour:
