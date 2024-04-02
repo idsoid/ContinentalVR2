@@ -23,7 +23,14 @@ public class AdvanceYes : MonoBehaviour, ILaserOption
 
     public void LaserClick()
     {
-        AudioManager.Instance.PlayAudio("ECIDAdvanceAnswer");
+        if (PlayerPrefsManager.Load("Language") == "English")
+        {
+            AudioManager.Instance.PlayAudio("ECIDAdvanceAnswer");
+        }
+        else if (PlayerPrefsManager.Load("Language") == "Japanese")
+        {
+            AudioManager.Instance.PlayAudio("JCIDAdvanceAnswer");
+        }
         cidAdvance1.SetActive(false);
         cidAdvance2.SetActive(true);
         questionCanvas.SetActive(false);

@@ -2961,7 +2961,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441974015}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.197}
+  m_LocalPosition: {x: 0, y: 0, z: 0.2068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2971,7 +2971,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.37, y: 1.127}
+  m_AnchoredPosition: {x: -0.377, y: 1.1133}
   m_SizeDelta: {x: 0.25, y: 0.34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &456692444
@@ -7990,7 +7990,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091150580}
   m_LocalRotation: {x: -0.18480907, y: 0, z: 0, w: 0.98277444}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0578}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0647}
   m_LocalScale: {x: 0.00075, y: 0.00075, z: 0.00075}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -7998,7 +7998,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -21.3, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.065, y: 0.024}
+  m_AnchoredPosition: {x: -0.065, y: 0.049}
   m_SizeDelta: {x: 650, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1091150582
@@ -8021,16 +8021,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Controls:
-
-    ''A'' Button - On/Off Laser
-
-    Index Trigger - Select
-
-    Joystick
-    (Up/Down) - Change Height
-
-    Joystick (Left/Right) - Change Direction'
+  m_text: "Controls:\n'A' Button - On/Off Laser\n'B' Button (In2visible) - On/Off
+    Display \nIndex Trigger - Select\nJoystick (Up/Down) - Change Height\nJoystick
+    (Left/Right) - Change Direction"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
