@@ -11,7 +11,6 @@ public class PopupOption : MonoBehaviour, ILaserOption
     private List<GameObject> otherOptions = new();
     public GameObject mainBox;
     private AudioManager audioManager;
-    private bool firstTime = true;
 
     void OnEnable ()
     {
@@ -68,11 +67,11 @@ public class PopupOption : MonoBehaviour, ILaserOption
                     audioManager.PlayAudio("ECIDBasic");
                     break;
                 case "CID2":
-                    if (firstTime)
+                    if (GameManager.Instance.cidFirstTime)
                     {
                         List<string> audiosToPlay = new() { "ECIDAdvance1", "ECIDAdvanceQuestion" };
                         audioManager.QueueAudios(audiosToPlay);
-                        firstTime = false;
+                        GameManager.Instance.cidFirstTime = false;
                     }
                     else
                     {
@@ -81,6 +80,10 @@ public class PopupOption : MonoBehaviour, ILaserOption
                     break;
                 case "CID_2b":
                     audioManager.PlayAudio("ECIDAdvance2");
+                    if (GameManager.Instance.cidFirstTime)
+                    {
+                        GameManager.Instance.cidFirstTime = false;
+                    }
                     break;
                 case "CID3":
                     audioManager.PlayAudio("ECIDPremium");
@@ -106,11 +109,11 @@ public class PopupOption : MonoBehaviour, ILaserOption
                     audioManager.PlayAudio("JCIDBasic");
                     break;
                 case "CID2":
-                    if (firstTime)
+                    if (GameManager.Instance.cidFirstTime)
                     {
                         List<string> audiosToPlay = new() { "JCIDAdvance1", "JCIDAdvanceQuestion" };
                         audioManager.QueueAudios(audiosToPlay);
-                        firstTime = false;
+                        GameManager.Instance.cidFirstTime = false;
                     }
                     else
                     {
@@ -119,6 +122,10 @@ public class PopupOption : MonoBehaviour, ILaserOption
                     break;
                 case "CID_2b":
                     audioManager.PlayAudio("JCIDAdvance2");
+                    if (GameManager.Instance.cidFirstTime)
+                    {
+                        GameManager.Instance.cidFirstTime = false;
+                    }
                     break;
                 case "CID3":
                     audioManager.PlayAudio("JCIDPremium");

@@ -81,6 +81,7 @@ public class ClusterOption : MonoBehaviour, ILaserOption
                 defaultStand.SetActive(true);
             }
         }
+        Debug.Log("cluster listindicator: " + listIndicator);
     }
 
     //Swipe functions

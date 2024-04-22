@@ -14,13 +14,7 @@ public class AdvanceYes : MonoBehaviour, ILaserOption
     {
         image = GetComponent<Image>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void LaserClick()
     {
         if (PlayerPrefsManager.Load("Language") == "English")
@@ -35,12 +29,10 @@ public class AdvanceYes : MonoBehaviour, ILaserOption
         cidAdvance2.SetActive(true);
         questionCanvas.SetActive(false);
     }
-
     public void LaserEnter()
     {
         image.color = new Color(1, 1, 1, 0.5f);
     }
-
     public void LaserExit()
     {
         image.color = new Color(1, 1, 1, 1.0f);

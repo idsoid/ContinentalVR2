@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
+    //Singleton + Instance
     private static AudioManager instance;
     public static AudioManager Instance { get { return instance; } }
     private void Awake()
@@ -37,6 +38,7 @@ public class AudioManager : MonoBehaviour
 
     void Update()
     {
+        //Output audio playing right now
         foreach (var audio in audioSources)
         {
             if (audio.isPlaying)
@@ -45,6 +47,7 @@ public class AudioManager : MonoBehaviour
             }
         }
 
+        //Checks for mute
         foreach (var audio in audioSources)
         {
             audio.mute = mute.isOn;

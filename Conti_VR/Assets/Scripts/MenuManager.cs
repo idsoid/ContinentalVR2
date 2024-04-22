@@ -15,14 +15,9 @@ public class MenuManager : MonoBehaviour
     private Image logoSprite, logoBackground;
     private float logoTimer = 6.0f;
 
-    void Start()
+    void Update() 
     {
-        float offsetAngle = playerCam.rotation.eulerAngles.y;
-        player.Rotate(0f, -offsetAngle, 0f);
-    }
-
-    void Update()
-    {
+        //Reset player direction to face menu selection
         if (playerCam.transform.localPosition != Vector3.zero && !heightSet)
         {
             float offsetAngle = playerCam.rotation.eulerAngles.y;
@@ -30,6 +25,8 @@ public class MenuManager : MonoBehaviour
             heightSet = true;
         }
 
+        //Fade in logo once it has been set active
+        //Changes the image's alpha value from 0f to 1f overtime
         if (logoTimer > 0 && logoSprite.IsActive())
         {
             logoTimer -= Time.deltaTime;
@@ -47,6 +44,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    //Menu Functions
     public void SaveChoices()
     {
         foreach (var toggle in languageChoice.ActiveToggles())

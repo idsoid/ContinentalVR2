@@ -27,6 +27,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Reset player direction to face steering wheel and position
         if (vrCam.transform.localPosition != Vector3.zero && !heightSet)
         {
             float heightDiff = 1.1f - vrCam.transform.localPosition.y;
@@ -46,6 +47,7 @@ public class PlayerManager : MonoBehaviour
             laserPointer.active = gameManager.GetLaser();
         }
 
+        //Turn off laser highlight when laser off
         if (!laserPointer.active)
         {
             foreach (var meshRenderer in meshRenderers)
@@ -54,7 +56,7 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        //in2visible
+        //Display change for in2visible
         if (mainin2visible.activeSelf)
         {
             in2visibleOff.SetActive(gameManager.Getin2visible());
@@ -63,6 +65,7 @@ public class PlayerManager : MonoBehaviour
 
         UpdateHeight();
 
+        //Return to MenuScene
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("MenuScene");

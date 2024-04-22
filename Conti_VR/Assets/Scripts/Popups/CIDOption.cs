@@ -19,7 +19,6 @@ public class CIDOption : MonoBehaviour, ILaserOption
     private List<GameObject> popupOptions = new();
     private int listIndicator = 0;
     private AudioManager audioManager;
-    private bool firstTime = true;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -74,6 +73,8 @@ public class CIDOption : MonoBehaviour, ILaserOption
                 listIndicator = i;
             }
         }
+        Debug.Log("cid listindicator: " + listIndicator);
+        Debug.Log("game manager first time: " + GameManager.Instance.cidFirstTime);
     }
 
     //Swipe functions
@@ -157,11 +158,11 @@ public class CIDOption : MonoBehaviour, ILaserOption
                     audioManager.PlayAudio("ECIDBasic");
                     break;
                 case 1:
-                    if (firstTime)
+                    if (GameManager.Instance.cidFirstTime)
                     {
                         List<string> audiosToPlay = new() { "ECIDAdvance1", "ECIDAdvanceQuestion" };
                         audioManager.QueueAudios(audiosToPlay);
-                        firstTime = false;
+                        GameManager.Instance.cidFirstTime = false;
                     }
                     else
                     {
@@ -170,6 +171,10 @@ public class CIDOption : MonoBehaviour, ILaserOption
                     break;
                 case 2:
                     audioManager.PlayAudio("ECIDAdvance2");
+                    if (GameManager.Instance.cidFirstTime)
+                    {
+                        GameManager.Instance.cidFirstTime = false;
+                    }
                     break;
                 case 3:
                     audioManager.PlayAudio("ECIDPremium");
@@ -186,11 +191,11 @@ public class CIDOption : MonoBehaviour, ILaserOption
                     audioManager.PlayAudio("JCIDBasic");
                     break;
                 case 1:
-                    if (firstTime)
+                    if (GameManager.Instance.cidFirstTime)
                     {
                         List<string> audiosToPlay = new() { "JCIDAdvance1", "JCIDAdvanceQuestion" };
                         audioManager.QueueAudios(audiosToPlay);
-                        firstTime = false;
+                        GameManager.Instance.cidFirstTime = false;
                     }
                     else
                     {
@@ -199,6 +204,10 @@ public class CIDOption : MonoBehaviour, ILaserOption
                     break;
                 case 2:
                     audioManager.PlayAudio("JCIDAdvance2");
+                    if (GameManager.Instance.cidFirstTime)
+                    {
+                        GameManager.Instance.cidFirstTime = false;
+                    }
                     break;
                 case 3:
                     audioManager.PlayAudio("JCIDPremium");
